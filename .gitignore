@@ -46,7 +46,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 python.exe
-python3.dll
+.dll
 python36.dll
 
 
