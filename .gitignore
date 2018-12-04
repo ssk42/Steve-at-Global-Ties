@@ -17,6 +17,15 @@ downloads/
 eggs/
 .eggs/
 lib/
+Lib/
+DLLs/
+Doc/
+Scripts/
+Tools/
+_pycache_/
+include/
+libs/
+tcl/
 lib64/
 parts/
 sdist/
@@ -36,6 +45,10 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+python.exe
+python3.dll
+python36.dll
+
 
 # Unit test / coverage reports
 htmlcov/
