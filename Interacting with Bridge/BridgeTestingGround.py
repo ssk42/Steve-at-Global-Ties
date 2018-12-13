@@ -30,7 +30,7 @@ fall2018PPEPSections={5,6,7,8,9,10,11,12,13}
 #print(response.headers)
 
 #for program in fall2018PPEPSections:
-bridgeResponse= requests.get('https://globaltiesus.bridgeapp.com/api/author/programs/14/leaners',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+bridgeResponse= requests.get(bridgeAPIurl+'/admin/data_dumps/download',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
 print(bridgeResponse.headers)
 
 
