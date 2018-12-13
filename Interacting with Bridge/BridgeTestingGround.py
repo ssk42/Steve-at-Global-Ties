@@ -4,9 +4,14 @@ parameters = {
     #"Response": "ppep"
     #"learner_id": "649",
     #"course_template_id": "19"
-
+    'program_id': 5
 }
 
+bridgeAPIurl= 'https://globaltiesus.bridgeapp.com/api'
+bridgeAcctAdminKey= 'f5249139-be37-45f9-9035-11b3d0fd2a30'
+bridgeAcctAdminSecret= 'b6785070-04e5-4b19-b6db-2ab13133a411'
+
+fall2018PPEPSections={5,6,7,8,9,10,11,12,13}
 
 ###Admin
 #response= requests.post('https://globaltiessandbox.bridgeapp.com/api/author/custom_fields', params=parameters, auth=('2e06e4c4-15f9-4aea-a056-34c101ccdeb3', 'c2df5ebf-36b1-45b2-85ea-dc3dce798ea4'))
@@ -23,6 +28,10 @@ parameters = {
 ##response= requests.get('https://globaltiesus.bridgeapp.com/api/admin/data_dumps/download', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
 ##print(response.headers)
 #print(response.headers)
+
+#for program in fall2018PPEPSections:
+bridgeResponse= requests.get('https://globaltiesus.bridgeapp.com/api/author/programs/14/leaners',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+print(bridgeResponse.headers)
 
 
 ##This turns Bridge IDs into Emails. Can also be changed to First Names or Last Names.
@@ -52,30 +61,32 @@ parameters = {
 #
 #
 #
+##response= requests.get('https://globaltiesus.bridgeapp.com/api/admin/users/22/summary', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
+##bridgeResponse= response.json()
+##print(bridgeResponse)
+##    
+##
+##completedProgramCounter=0
+##skippedCounter=0
+##for x in range(22,735):
+##    parameters= {
+##        "id": x
+##        }
+##    try:
+##        response= requests.get('https://globaltiesus.bridgeapp.com/api/admin/users/'+str(x)+'/summary', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
+##        bridgeResponse= response.json()
+##        if bridgeResponse['summary'].get('completed_programs')!=0 &bridgeResponse['summary'].get('total_overdue')==0 :
+##            completedProgramCounter=completedProgramCounter+1
+##        print("Counting..."+str(x))
+##    except json.decoder.JSONDecodeError:
+##        skippedCounter=skippedCounter+1
+##        print("Skipping..."+str(x))
+##    
+##print("Total number completed is: "+str(completedProgramCounter))
+##print("Total number skipped is: "+str(skippedCounter))
+##
 
-response= requests.get('https://globaltiesus.bridgeapp.com/api/admin/users/22/summary', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
-bridgeResponse= response.json()
-print(bridgeResponse)
-    
 
-completedProgramCounter=0
-skippedCounter=0
-for x in range(22,735):
-    parameters= {
-        "id": x
-        }
-    try:
-        response= requests.get('https://globaltiesus.bridgeapp.com/api/admin/users/'+str(x)+'/summary', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
-        bridgeResponse= response.json()
-        if bridgeResponse['summary'].get('completed_programs')!=0 &bridgeResponse['summary'].get('total_overdue')==0 :
-            completedProgramCounter=completedProgramCounter+1
-        print("Counting..."+str(x))
-    except json.decoder.JSONDecodeError:
-        skippedCounter=skippedCounter+1
-        print("Skipping..."+str(x))
-    
-print("Total number completed is: "+str(completedProgramCounter))
-print("Total number skipped is: "+str(skippedCounter))
 
 #This doe
 #
