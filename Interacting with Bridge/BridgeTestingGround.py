@@ -1,10 +1,8 @@
 import requests, pprint, json, csv, sys, openpyxl
+import pandas as pd
 parameters = {
-    #"search": "secc",
-    #"Response": "ppep"
-    #"learner_id": "649",
-    #"course_template_id": "19"
-    'program_id': 5
+    'message: Test'
+    'to: 2'
 }
 
 bridgeAPIurl= 'https://globaltiesus.bridgeapp.com/api'
@@ -27,16 +25,42 @@ fall2018PPEPSections={5,6,7,8,9,10,11,12,13}
 #response= requests.post('https://globaltiesus.bridgeapp.com/api/admin/data_dumps', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
 ##response= requests.get('https://globaltiesus.bridgeapp.com/api/admin/data_dumps/download', auth=('f5249139-be37-45f9-9035-11b3d0fd2a30', 'b6785070-04e5-4b19-b6db-2ab13133a411'), params= parameters)
 ##print(response.headers)
+# bridgeResponse= requests.get(bridgeAPIurl+'/author/course_templates?includes[]sort=archived&archived=1&limit=2000',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+
 #print(response.headers)
 
 #for program in fall2018PPEPSections:
-bridgeResponse= requests.get(bridgeAPIurl+'/admin/data_dumps/download',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
-print(bridgeResponse.headers)
+
+extraParams='?with_deleted=true&includes[]=programs'
+bridgeResponse= requests.post(bridgeAPIurl+'/author/messages',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+# bridgeResponse2= requests.get(bridgeAPIurl+'/author/users/2/notifications',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+# bridgeResponse=pd.DataFrame(bridgeResponse.json())
+# bridgeResponse.to_csv('F:/Steve/notificationsForSupport.csv')
+
+print(bridgeResponse.json())
+# dataFrames=pd.DataFrame([])
+# def formADataFrame(xyz):
+# 	bridgeResponse= requests.get(bridgeAPIurl+'/author/users/'+str(xyz)+'/notifications',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+# 	notifications=pd.DataFrame(bridgeResponse.json()['notifications'])
+# 	return notifications
+
+# for xyz in range(2,740):
+# 	test=formADataFrame(xyz)
+# 	if xyz!=2:
+# 		dataFrames=pd.concat([dataFrames,test])
+# 		print('processing'+str(xyz))
+# 	if xyz==736:
+# 		dataFrames.to_csv('F:/Steve/notificationsAll.csv')
+# 		print('Saved at '+str(xyz))
+# courseTemplates=pd.DataFrame(bridgeResponse.json()['notifications'])
+# courseTemplates2=pd.DataFrame(bridgeResponse2.json()['notifications'])
+#courseTemplates=pd.concat([courseTemplates,courseTemplates2])
+# courseTemplates.to_csv('F:/Steve/notifications2.csv', encoding='latin1')
 
 
 ##This turns Bridge IDs into Emails. Can also be changed to First Names or Last Names.
 ##
-##
+##DEPRICATED: PLEASE SEE TRANSLATE BRIDGE ID TO HUMAN.py
 ##wbTest=openpyxl.load_workbook('C:/Users/sreitz/Desktop/test.xlsx') #This is the thing that needs to be translated
 ##wsTest=wbTest.active
 ##toBeTranslated= wsTest['B'] #Particular userid column

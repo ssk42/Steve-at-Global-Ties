@@ -28,10 +28,11 @@ for userVisits in ws1.iter_rows():
                 for rowNum in range(len(bridgeUsersWS['A'])):
                     if userVisits[column].value== bridgeUsersWS['A'][rowNum].value:
                         userVisits[column].value=bridgeUsersWS['B'][rowNum].value
+                        counter=counter+1
 ##                for finisher in range(len(finishersWS['E'])):
 ##                    if userVisits[column].value== finishersWS['E'][finisher].value.lower():
 ##                        userVisits[column].value=finishersWS['C'][finisher].value.lower()                        
-                       counter=counter+1
+#                       counter=counter+1
 ##                        #test
                         
                         print("appending..."+str(counter))
