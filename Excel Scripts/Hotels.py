@@ -81,6 +81,40 @@ for name, values in hotelBlackoutDF.iteritems():
 	else:
 		counter=counter+1
 	print(counter)
+counter=1
+
+for name, values in hotelOneDF.iteritems():
+	one= {}
+	for x in range(0, 16):
+		if(values[x]=='Hotel can accommodate ONE (1) '):
+			one[x]=hotelName(x)
+			ws[counter][3].value=',\n '.join(str(hotelName(elem)) for elem in one)
+			wb.save('F:/Steve/Testing Hotels.xlsx')
+			print("Counted")
+			# print(val)
+	if counter>40:
+		counter=1
+	else:
+		counter=counter+1
+	print(counter)
+
+counter=1
+for name, values in hotelTwoDF.iteritems():
+	two= {}
+	for x in range(0, 16):
+		if(values[x]=='Hotel CAN accommodate two (2) separate IVLP projects during this week'):
+			two[x]=hotelName(x)
+			ws[counter][4].value=',\n '.join(str(hotelName(elem)) for elem in two)
+			wb.save('F:/Steve/Testing Hotels.xlsx')
+			print("Counted")
+			# print(val)
+	if counter>40:
+		counter=1
+	else:
+		counter=counter+1
+	print(counter)
+
+
 wb.save('F:/Steve/Testing Hotels.xlsx')
 
 
