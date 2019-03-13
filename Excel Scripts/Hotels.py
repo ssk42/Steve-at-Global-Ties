@@ -67,7 +67,7 @@ for dateName,dateRangeRow in dateRangesDF.iteritems():
 			# print(x, values[x])
 			if(values[x]=='Blackout dates'):
 				dateDict[x]=hotelName(x)
-				#test
+				#test 2
 				# print(dateRangeRow)
 	print(dateDict[16])
 				# print(numpy.linspace(values[x],15))
