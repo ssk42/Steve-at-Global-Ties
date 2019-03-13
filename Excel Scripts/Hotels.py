@@ -1,6 +1,9 @@
 import pandas as pd
+from openpyxl.reader.excel import load_workbook
 import openpyxl
 import numpy
+
+counter=1
 
 ##This is the SurveyGizmo export. This is the master data.
 hotelDF= pd.read_csv('F:/Steve/hotels.csv', encoding='latin1')
@@ -10,6 +13,8 @@ blackout= hotelDF.columns[hotelDF.columns.str.startswith('Blackout')]
 oneIVLP= hotelDF.columns[hotelDF.columns.str.startswith('Hotel can accommodate ONE (1)')]
 twoIVLP= hotelDF.columns[hotelDF.columns.str.startswith('Hotel CAN accommodate two (2)')]
 hotelNamesDF= pd.DataFrame(hotelDF['Hotel Name'])
+wb= load_workbook('F:/Steve/Hotel Date Ranges.xlsx')
+ws=wb.active
 
 
 ## The following section makes the newly found columns into dataFrames. It starts with Blackout dates, then One IVLP Group, then Two IVLP Groups
@@ -60,17 +65,22 @@ def hotelName(num):
 ## The following section starts the main gist of the program. The first part sets up the dictionary entries per unique IVLP date range.
 dateRangesDF= pd.read_csv('F:/Steve/Hotel Date Ranges.csv')
 dateRangesDF= pd.DataFrame(dateRangesDF['Check-In'])
-for dateName,dateRangeRow in dateRangesDF.iteritems():
-	for name, values in hotelBlackoutDF.iteritems():
-		dateDict={}
-		for x in range(0, 16):
-			# print(x, values[x])
-			if(values[x]=='Blackout dates'):
-				dateDict[x]=hotelName(x)
-				#test 2
-				# print(dateRangeRow)
-	print(dateDict[16])
-				# print(numpy.linspace(values[x],15))
 
+# for dateName,dateRangeRow in dateRangesDF.iteritems():
+for name, values in hotelBlackoutDF.iteritems():
+	blackout= {}
+	for x in range(0, 16):
+		if(values[x]=='Blackout dates'):
+			blackout[x]=hotelName(x)
+			ws[counter][2].value=',\n '.join(str(hotelName(elem)) for elem in blackout)
+			wb.save('F:/Steve/Testing Hotels.xlsx')
+			print("Counted")
+			# print(val)
+	if counter>40:
+		counter=1
+	else:
+		counter=counter+1
+	print(counter)
+wb.save('F:/Steve/Testing Hotels.xlsx')
 
 
