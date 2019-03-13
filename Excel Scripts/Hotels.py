@@ -62,13 +62,14 @@ dateRangesDF= pd.read_csv('F:/Steve/Hotel Date Ranges.csv')
 dateRangesDF= pd.DataFrame(dateRangesDF['Check-In'])
 for dateName,dateRangeRow in dateRangesDF.iteritems():
 	for name, values in hotelBlackoutDF.iteritems():
-		dateRangeRow={}
+		dateDict={}
 		for x in range(0, 16):
 			# print(x, values[x])
 			if(values[x]=='Blackout dates'):
-				dateRangeRow[x]=hotelName(x)
-				print(dateRangeRow)
-	print(dateName)
+				dateDict[x]=hotelName(x)
+				#test
+				# print(dateRangeRow)
+	print(dateDict[16])
 				# print(numpy.linspace(values[x],15))
 
 
