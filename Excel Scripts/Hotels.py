@@ -60,16 +60,16 @@ def hotelName(num):
 ## The following section starts the main gist of the program. The first part sets up the dictionary entries per unique IVLP date range.
 dateRangesDF= pd.read_csv('F:/Steve/Hotel Date Ranges.csv')
 dateRangesDF= pd.DataFrame(dateRangesDF['Check-In'])
-for dateName,dateRangeRow in dateRangesDF.iteritems():
-	for name, values in hotelBlackoutDF.iteritems():
-		dateDict={}
-		for x in range(0, 16):
-			# print(x, values[x])
-			if(values[x]=='Blackout dates'):
-				dateDict[x]=hotelName(x)
-				#test 2
-				# print(dateRangeRow)
-	print(dateDict[16])
+# for dateName,dateRangeRow in dateRangesDF.iteritems():
+for name, values in hotelBlackoutDF.iteritems():
+	blackout= {}
+	for x in range(0, 16):
+		
+		# print(x, values[x])
+		if(values[x]=='Blackout dates'):
+			blackout[x]=hotelName(x)
+			print(blackout)
+	# print(dateDict[16])
 				# print(numpy.linspace(values[x],15))
 
 
