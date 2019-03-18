@@ -20,6 +20,7 @@ wsProjects= wbProjects.active
 
 ## The following section makes the newly found columns into dataFrames. It starts with Blackout dates, then One IVLP Group, then Two IVLP Groups
 hotelBlackoutDF= hotelDF[blackout]
+hotelBlackoutDF.to_csv("F:/Steve/Blackout Dataframe.csv")
 hotelBlackoutDF= pd.merge(hotelNamesDF,hotelBlackoutDF, on=hotelBlackoutDF.index)
 # hotelBlackoutDF.to_csv('F:/Steve/testBlackoutHotels.csv')
 hotelOneDF= hotelDF[oneIVLP]
@@ -72,17 +73,20 @@ def projectAndHotel(hotelDict,counter,projectCounter,groupType):
 	for row_cells in wsProjects.iter_rows():
 			for cell in row_cells:
 				if pd.notnull(ws[counter][0].value):
+
 					if ws[counter][0].value+timedelta(days=2)==cell.value or ws[counter][0].value+timedelta(days=3)==cell.value:
 						# print('dsakjddhjkahdsajh')
 						if groupType=='blackout':
-							cell.offset(column=4).value=',\n '.join(str(hotelName(elem)) for elem in hotelDict)
-							print(cell.offset(column=4).value)
+							cell.offset(column=4).value=',\n '+str(counter).join(str(hotelName(elem)) for elem in hotelDict)
+							# if counter==40 or 41:
+								# print(cell.offset(column=4).value)
+								# print(cell)
 						if groupType=='one':
 							cell.offset(column=5).value=',\n '.join(str(hotelName(elem)) for elem in hotelDict)
-							print(cell.offset(column=5).value)							
+							# print(cell.offset(column=5).value)							
 						if groupType=='two':
 							cell.offset(column=6).value=',\n '.join(str(hotelName(elem)) for elem in hotelDict)
-							print(cell.offset(column=6).value)							
+							# print(cell.offset(column=6).value)							
 						projectCounter=projectCounter+1
 					# elif(pd.notnull(cell.value)):
 					# 	if groupType=='blackout':
@@ -100,7 +104,10 @@ def projectAndHotel(hotelDict,counter,projectCounter,groupType):
 for name, values in hotelBlackoutDF.iteritems():
 	blackout= {}
 	for x in range(0, 16):
+		# print(values[x])
+
 		if(values[x]=='Blackout dates'):
+
 			blackout[x]=hotelName(x)
 			ws[counter][2].value=',\n '.join(str(hotelName(elem)) for elem in blackout)
 			wb.save('F:/Steve/Testing Hotels.xlsx')
@@ -136,7 +143,7 @@ for name, values in hotelOneDF.iteritems():
 counter=1
 for name, values in hotelTwoDF.iteritems():
 	two= {}
-	for x in range(0, 16):
+	for x in range(0, 16):		
 		if(values[x]=='Hotel CAN accommodate two (2) separate IVLP projects during this week'):
 			two[x]=hotelName(x)
 			ws[counter][4].value=',\n '.join(str(hotelName(elem)) for elem in two)
