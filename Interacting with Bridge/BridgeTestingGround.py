@@ -1,13 +1,24 @@
 import requests, pprint, json, csv, sys, openpyxl
 import pandas as pd
 parameters = {
-    'message: Test'
-    'to: 2'
+
+    'distribution':{
+		"title":"Python Test",
+
+		"closes_at":"2019-06-02T05:59:00.000Z",
+
+		"recipient_groups":[{"group_id":"58"}]
+		},
+    'survey_id':'9'
 }
 
 bridgeAPIurl= 'https://globaltiesus.bridgeapp.com/api'
 bridgeAcctAdminKey= 'f5249139-be37-45f9-9035-11b3d0fd2a30'
 bridgeAcctAdminSecret= 'b6785070-04e5-4b19-b6db-2ab13133a411'
+
+bridgeSbAPIurl= 'https://globaltiessandbox.bridgeapp.com/api'
+bridgeSbAdminKey= '81265ad8-e65b-46d7-ab8b-7f22d669953b' 
+bridgeSbAdminSecret= 'affe15bc-7042-4a09-8a80-f5aa64e4eae2'
 
 fall2018PPEPSections={5,6,7,8,9,10,11,12,13}
 
@@ -31,13 +42,16 @@ fall2018PPEPSections={5,6,7,8,9,10,11,12,13}
 
 #for program in fall2018PPEPSections:
 
-extraParams='?with_deleted=true&includes[]=programs'
-bridgeResponse= requests.post(bridgeAPIurl+'/author/messages',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
-# bridgeResponse2= requests.get(bridgeAPIurl+'/author/users/2/notifications',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+extraParams='?with_deleted=true&includes[]=programsgi'
+# bridgePost= requests.post(bridgeAPIurl+'/author/surveys/1/distributions',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+# bridgeSbPost= requests.post(bridgeSbAPIurl+'/author/surveys/9/distributions',auth=(bridgeSbAdminKey,bridgeSbAdminSecret), params=parameters)
+# bridgeGet=requests.get(bridgeAPIurl+'/author/users/2/notifications',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
+grantsGet=requests.get('https://www.globaltiesus.org')
 # bridgeResponse=pd.DataFrame(bridgeResponse.json())
 # bridgeResponse.to_csv('F:/Steve/notificationsForSupport.csv')
 
-print(bridgeResponse.json())
+print(grantsGet)
+# print(bridgeGet.json())
 # dataFrames=pd.DataFrame([])
 # def formADataFrame(xyz):
 # 	bridgeResponse= requests.get(bridgeAPIurl+'/author/users/'+str(xyz)+'/notifications',auth=(bridgeAcctAdminKey,bridgeAcctAdminSecret), params=parameters)
